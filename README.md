@@ -6,5 +6,5 @@ Perchè non fare a gare su chi dei tuoi amici va più volte in bagno? Nessuno se
 Benvenuti alla PooPooCup.
 Intro           |  Login
 :-------------------------:|:-------------------------:
-![]("./assets/images/git_intro.jpeg" =250x500)  |  ![]("./assets/images/git_login.jpeg"  =250x500)
+![](["./assets/images/git_intro.jpeg"](https://github.com/renato-milano/PooPooCup/blob/master/assets/images/git_login.jpeg) =250x500)  |  ![](["./assets/images/git_login.jpeg"](https://github.com/renato-milano/PooPooCup/blob/master/assets/images/git_intro.jpeg)  =250x500)
 
