@@ -1,37 +1,47 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { StyleSheet, Text, View } from "react-native";
+import { Slot, SplashScreen, Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import React, { useEffect } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import GlobalProvider from "../context/GlobalProvider";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+const RootLayout = () => {
+  const [fontsLoaded, error] = useFonts({
+    "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("../assets/fonts/Poppins-ExtraBold.ttf"),
+    "Poppins-ExtraLight": require("../assets/fonts/Poppins-ExtraLight.ttf"),
+    "Poppins-Light": require("../assets/fonts/Poppins-Light.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
+    "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
+    "BalooBhai2-Regular": require("../assets/fonts/BalooBhai2-Regular.ttf"),
+    "BalooBhai2-Medium": require("../assets/fonts/BalooBhai2-Medium.ttf"),
+    "BalooBhai2-SemiBold": require("../assets/fonts/BalooBhai2-SemiBold.ttf"),
+    "BalooBhai2-ExtraBold": require("../assets/fonts/BalooBhai2-ExtraBold.ttf"),
+    "BalooBhai2-Bold": require("../assets/fonts/BalooBhai2-Bold.ttf"),
   });
-
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    if (error) throw error;
 
-  if (!loaded) {
-    return null;
-  }
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
+
+  if (!fontsLoaded && !error) return null;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <GlobalProvider>
       <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
       </Stack>
-    </ThemeProvider>
+    </GlobalProvider>
   );
-}
+};
+
+export default RootLayout;
+
+const styles = StyleSheet.create({});
