@@ -27,18 +27,20 @@ className=""
 screenOptions={{
     tabBarShowLabel: false,
     headerShown: false,
-    tabBarActiveTintColor: '#D5BDAF',
-    tabBarInactiveTintColor: '#BC8A5F',
+    tabBarActiveTintColor: '#99582A',
+    tabBarInactiveTintColor: '#E3D5CA',
+    tabBarStyle: {
+        backgroundColor: 'transparent', // Imposta la tab bar trasparente
+        borderTopWidth: 0, // Rimuovi il bordo superiore (se presente)
+        elevation: 0, // Rimuovi l'ombra su Android
+        shadowOpacity: 0, // Rimuovi l'ombra su iOS
+        height:60
+    },
     tabBarOptions: {
         showIcon: true,
         showLabel: false,
         lazyLoad: true,
-        style: {
-            backgroundColor:'transparent',
-            borderTopWidth: 0,
-            position: 'absolute',
-            elevation: 0  // <-- this is the solution
-          },
+        
       }
 }
 }>
