@@ -10,7 +10,9 @@ import PooSad from "../assets/images/poo_sad.png";
 import PooImbarazzo from "../assets/images/poo_imbarazzo.png";
 import PooConfused from "../assets/images/poo_confused.png";
 import PooSurprise from "../assets/images/poo_surprised.png";
+import PooBronze from "../assets/images/poo_bronze.png";
+import PooSilver from "../assets/images/poo_silver.png";
+import PooGold from "../assets/images/poo_gold.png";
+import AllPoops from "../assets/images/poo_AllPoops.png"
 
-
-
-export default { smile,happy,smilePoo,surprisePoo,angryPoo, PooConfused,PooFack,PooHappy,PooImbarazzo,PooLove,PooSad,PooSurprise };
+export default { smile,happy,smilePoo,surprisePoo,angryPoo, PooConfused,PooFack,PooHappy,PooImbarazzo,PooLove,PooSad,PooSurprise,PooBronze,PooSilver,PooGold, AllPoops };

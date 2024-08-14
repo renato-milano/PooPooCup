@@ -2,18 +2,18 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RefreshControl } from "react-native";
 import React, { useState, useEffect } from "react";
-import SearchInput from "../../components/SearchInput";
 import { Alert } from "react-native";
-import { getAllRooms } from "../../lib/appwrite";
+import { getAllRooms, getAllRoomsByUser } from "../../lib/appwrite";
 import RoomCard from "../../components/RoomCard";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+import MessageBox from "../../components/MessageBox";
+import { images } from "../../constants";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const explore = () => {
-  const CreaNew = () => {
-    router.push("../NewLega");
-  };
+  const { user } = useGlobalContext();
   const [data, setData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
@@ -21,7 +21,7 @@ const explore = () => {
     const fetchData = async () => {
       setisLoading(true);
       try {
-        const response = await getAllRooms();
+        const response = await getAllRoomsByUser(user);
         setData(response);
       } catch (error) {
         Alert.alert("Errore", error.message);
@@ -32,10 +32,13 @@ const explore = () => {
     fetchData();
   }, []);
 
+  const CreaNew = () => {
+    router.push("../NewLega");
+  };
   const reloadContent = async () => {
     setisLoading(true);
     try {
-      const response = await getAllRooms();
+      const response = await getAllRoomsByUser(user);
       setData(response);
     } catch (error) {
       Alert.alert("Errore", error.message);
@@ -57,17 +60,20 @@ const explore = () => {
         colors={["white", "transparent"]}
         style={styles.background}
       />
-      {!isLoading ? (
+      {!isLoading && data.length > 0 ? (
         <FlatList
           data={data}
           keyExtractor={(item) => item.$id}
-          renderItem={({ item }) => <RoomCard room={item}></RoomCard>}
+          renderItem={({ item }) => (
+            <View className="p-2">
+              <RoomCard room={item}></RoomCard>
+            </View>
+          )}
           ListHeaderComponent={() => (
             <View>
-              <Text className="font-bregular text-2xl text-primary">
+              <Text className="px-2 font-bregular text-2xl text-primary">
                 Le tue Leghe
               </Text>
-              <SearchInput placeholder="Cerca tra le leghe..." />
             </View>
           )}
           refreshControl={
@@ -75,10 +81,20 @@ const explore = () => {
           }
         />
       ) : null}
+      {!isLoading && data.length == 0 ? (
+        <View className="flex-1 justify-center items-center p-2">
+          <MessageBox
+            image={images.PooSad}
+            text={
+              "Sembra che tu non sia ancora in nessuna lega, clicca in basso per crearla o aggiungerti ad una esistente!"
+            }
+          ></MessageBox>
+        </View>
+      ) : null}
       <CustomButton
         handlePress={CreaNew}
-        containerStyles={"p-5 m-5"}
-        title={"+ Nuova Lega"}
+        containerStyles={"shadow-xl p-5 m-5"}
+        title={"Nuova Lega"}
       ></CustomButton>
     </SafeAreaView>
   );

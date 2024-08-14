@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { icons, images } from "../constants";
 import { getRoomMembers, getRoomUser } from "../lib/appwrite";
 import { TouchableOpacity } from "react-native";
+import { router } from "expo-router";
 
 const RoomCard = ({ room }) => {
   const [data, setData] = useState([]);
@@ -27,7 +28,15 @@ const RoomCard = ({ room }) => {
   return (
     <SafeAreaView className="flex-row justify-center items-center">
       {!isLoading ? (
-        <TouchableOpacity className="w-full bg-tekla2 my-2 px-2 rounded-xl flex-row items-center">
+        <TouchableOpacity
+          className="w-full bg-tekla2 my-2 px-2 rounded-xl flex-row items-center"
+          onPress={() => {
+            console.log(room.$id);
+            const id = room.$id;
+            router.setParams(id);
+            router.push("lobby/" + room.$id);
+          }}
+        >
           <View className="w-[50px] h-[50px] rounded-lg">
             <Image
               source={images.PooConfused}

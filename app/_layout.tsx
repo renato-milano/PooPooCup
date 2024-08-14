@@ -38,6 +38,11 @@ const RootLayout = () => {
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="NewLega" options={{ headerShown: false }} />
+        <Stack.Screen name="lobby/[id]" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="lobby/update/[data]"
+          options={{ headerShown: false }}
+        />
       </Stack>
     </GlobalProvider>
   );

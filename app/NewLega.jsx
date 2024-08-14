@@ -52,9 +52,9 @@ const NewLega = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="bg-tekla1 h-full">
       <Banner></Banner>
-      <View className="p-5">
+      <View className="flex-1 items-center justify-center p-5">
         <LinearGradient
           // Background Linear Gradient
           colors={["white", "transparent"]}
@@ -84,18 +84,18 @@ const NewLega = () => {
             <MessageBox
               image={images.PooHappy}
               text={
-                "Vuoi creare una nuova lega della PooPooCup o partecipare con un link di invito?"
+                "Vuoi creare una nuova lega della PooPooCup o vuoi partecipare con un codice di invito?"
               }
             ></MessageBox>
             <View className="flex flex-row justify-center p-5">
               <CustomButton
                 handlePress={SetNuova}
-                containerStyles={"p-5 m-5 bg-primary"}
+                containerStyles={"shadow-xl p-5 m-5 bg-primary"}
                 title={"Crea Nuova"}
               ></CustomButton>
               <CustomButton
                 handlePress={JoinRoom}
-                containerStyles={"p-5 m-5"}
+                containerStyles={"shadow-xl p-5 m-5"}
                 title={"Partecipa"}
               ></CustomButton>
             </View>
@@ -115,8 +115,8 @@ const NewLega = () => {
                   className="bg-light font-bregular text-white text-xl px-10 py-5 rounded-xl"
                   onChangeText={(text) => setNomeLega(text)}
                   value={NomeLega}
-                  placeholderTextColor={"white"}
-                  placeholder="Inserisci il nome!"
+                  placeholderTextColor={"#E3D5CA"}
+                  placeholder="Inserisci il nome..."
                 />
               </View>
               <CustomButton
@@ -137,7 +137,7 @@ const NewLega = () => {
               ></MessageBox>
               <View className="flex flex-row justify-center p-5">
                 <TextInput
-                  className="bg-light font-bregular text-white text-xl px-10 py-5 rounded-xl"
+                  className="text-center bg-light font-bregular text-white text-xl px-10 py-5 rounded-xl"
                   onChangeText={(text) => setCodiceLega(text)}
                   value={CodiceLega}
                   placeholderTextColor={"white"}

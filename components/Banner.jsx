@@ -17,7 +17,7 @@ const Banner = () => {
   const path = usePathname();
   return (
     <SafeAreaView className="px-2 py-2 bg-white">
-      {!isLoading && isLogged ? (
+      {isLoading && isLogged ? (
         <View className="items-center flex-row justify-between">
           <Image
             resizeMode="contain"
